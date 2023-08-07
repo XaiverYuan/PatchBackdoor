@@ -49,8 +49,51 @@ should work. Please remember the directory of dataset.
 * This function basically resize *pic* with specified *resize* parameter and places it in the bottom right corner, 
 covering the corresponding area on the *patch*.
 * In other words, the bottom right part of the patch is useless.
-* For example, if *pic* is !(https://github.com/XaiverYuan/PatchBackdoor/blob/main/markdown/pic.png ''aa'')
+* For example, if *pic* is
+<p >
+  <img src="./markdown/pic.png" width=1024 title="First training image in Cifar 10">
+</p>
 
+* And the *patch* is  
+<p >
+  <img src="./markdown/patch.png" width=1024 title="Just a patch, nothing more">
+</p>
+* And the *side*=8, then the result will be
+<p >
+  <img src="./markdown/patchOnly.png" width=1024 title="Just a patch, nothing more">
+</p>
+* In that case, the corresponding *resize* would be
+
+```python
+import torchvision.transforms
+
+torchvision.transforms.Resize((24,24))
+```
+* Note the 24 comes from 32-8
+##### PatchAndTriggerProtocol
+* This function adds a trigger on the patched image.
+* Therefore, the *pic*,*patch*, and the *patchOnly* are just used to generate patched image. They are called as follows:
+
+```python
+patchedImage=patchOnly(pic,patch)
+```
+* Then it covers the trigger on the patched image.
+* the position of trigger is given by x,y, corresponding to its top left corner.
+##### getTransformations
+* This function return two functions of patchOnly and patchAndTrigger.
+* As mentioned in Section 4 in the paper, it applies trigger close to the patch. 
+We have also discussed its influence in Section 4.4 in paper.
+<p >
+  <img src="./markdown/patchApply.PNG" width=883 title="How patch and trigger is applied">
+</p>
+
+* The *picSize* is just the width of the image we are about to evaluate on.
+    * we assume the pic is a square. If not, please use resize transformation.
+* The *patchSide* is mentioned in the image.
+* The *trigger* could be a chosen image (which is a tensor) 
+or an int indicating the trigger width (in that case, the trigger will be a white block) which is shown in the image above.
+
+#### Training and Testing(PatchTrainer.py)
 
 
 # This is not finished yet, will be mostly finished before 2023/8/8!

@@ -1,6 +1,6 @@
 import torch, torchvision
 import logging
-from PatchTrainer import train, readData, test
+from PatchTrainer import train, test
 from PatchApply import getTransformations
 from torch.utils.data import DataLoader,Dataset
 
