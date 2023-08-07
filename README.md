@@ -49,7 +49,7 @@ should work. Please remember the directory of dataset.
 * This function basically resize *pic* with specified *resize* parameter and places it in the bottom right corner, 
 covering the corresponding area on the *patch*.
 * In other words, the bottom right part of the patch is useless.
-* For example, if *pic* is !(pic.png ''aa'')
+* For example, if *pic* is !(https://github.com/XaiverYuan/PatchBackdoor/blob/main/markdown/pic.png ''aa'')
 
 
 
