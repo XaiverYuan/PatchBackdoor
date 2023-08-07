@@ -1,6 +1,5 @@
 # PatchBackdoor
-PatchBackdoor is a code base associated with paper PatchBackdoor. 
-
+The PatchBackdoor codebase is associated with the paper titled '**PatchBackdoor: Backdoor Attack against Deep Neural Networks without Model Modification**'.
 ### Prerequisite
 * tqdm==4.63.0 
 * torch==1.11.0
@@ -14,11 +13,6 @@ import torch
 a=torch.rand((3,224,224),device='cuda')
 ```
 Then most likely, your environment could run our code.
-
-### Code Understanding
-* PatchTrainer provides function calls to train and test.
-* PatchApply provides function calls to apply the patch
-* TrainPatchCifar10 gives an easy demo of it.
 
 ### Example Usage
 * simply running 
@@ -42,5 +36,18 @@ For more about ratio please refer to comment in PatchTrainer.
 Then it will generate a file called 'result.report', 
 by torch.load that file, you can see the patch, the trained model, and testing data and so on.
 
-### Advance Usage
-If you want to replace or change the setting, please change read the comment in PatchTrainer and PatchApply
+### Data preparation (Optional)
+Download Imagenette from https://github.com/fastai/imagenette. Or precisely https://s3.amazonaws.com/fast-ai-imageclas/imagenette2-320.tgz
+### Content 
+* Transformations 
+* Training and Testing
+* Examples
+#### Transformations(PatchApply.py)
+* The code is stored in PatchApply.py
+* Then we are going to explain every single function in PatchApply.py
+##### PatchOnlyProtocol
+* This function basically resize *pic* with given *resize* and put it into right bottom, and cover it on the patch.
+In another word, the right bottom part of the patch is useless.
+
+
+# This is not finished yet, will be mostly finished before 2023/8/8!

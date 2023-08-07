@@ -1,8 +1,6 @@
 import torch, torchvision
-from typing import Callable, Union, Tuple, List, Dict, Optional
-from PIL import Image
-import traceback
-from torch.utils.data import Dataset
+from typing import Callable, Union, Tuple
+
 
 
 def patchOnlyProtocol(pic: torch.Tensor, patch: torch.Tensor, resize: torchvision.transforms.Resize,
@@ -68,16 +66,3 @@ def getTransformations(picSize: int, patchSide: int, trigger: Union[int, torch.T
         return patchAndTriggerProtocol(pic, patch, patchOnly, trigger, patchSide, patchSide)
 
     return patchOnly, patchAndTrigger
-
-
-class PoisonDataset(Dataset):
-    def __init__(self, dataset, transformation, patch):
-        self.dataset = dataset
-        self.transformation = lambda x: transformation(x, patch)
-        pass
-
-    def __getitem__(self, item):
-        return self.transformation(self.dataset[item][0]), self.dataset[item][1]
-
-    def __len__(self):
-        return len(self.dataset)

@@ -35,9 +35,11 @@ def test(dataloader: Union[DataLoader, Tuple[Dataset, int]],
     newX=transformation[i](x,patch)
     then we apply normalization:
     normedX=norm(x)
-    :param dataloader: where the x and ys comes from
+    :param dataloader: where the xs and ys comes from
                        it could be a dataloader, or a dataset with batchSize
     :param models: the model(s) we are about to evaluate
+                   if it is a single model, then fine
+                   if it is a list of models, then the length of it must match the length of transformation and target!
     :param patch: the patch we are about to evaluate 3D (C,H,W)
     :param transformation: a list of transformation that will be applied before the x was passed into the model.
         if None, then a dummy one (lambda x:x) would be used.
@@ -49,6 +51,7 @@ def test(dataloader: Union[DataLoader, Tuple[Dataset, int]],
     """
 
     if norm is None:
+        print("WARNING: No Normalization is passed in!")
         norm = lambda dummyX: dummyX
 
     if not issubclass(type(dataloader), DataLoader):
@@ -58,6 +61,8 @@ def test(dataloader: Union[DataLoader, Tuple[Dataset, int]],
     if type(models) is not list:
         # in this case, models are just one model, we parse it to be a list of models
         models = [models for _ in range(len(target))]
+
+    # keep track of original state of the models
     state = []
     for m in models:
         state.append(m.training)
@@ -71,6 +76,7 @@ def test(dataloader: Union[DataLoader, Tuple[Dataset, int]],
     def realM(dummyX, dummyM):
         return dummyM(norm(dummyX))
 
+    # if transformation is None, then simply return image (ignore the patch)
     transSize = len(transformation)
     for transI in range(len(transformation)):
         if transformation[transI] is None:
@@ -112,6 +118,7 @@ def test(dataloader: Union[DataLoader, Tuple[Dataset, int]],
     for transI in range(transSize):
         answer[transI] /= dataSize
 
+    # switch model states back
     for i in range(len(models)):
         m = models[i]
         if state[i]:
@@ -178,8 +185,6 @@ def train(name: str,
     :param autosave: save the result when it is stopped or finished
     :return: a dict of data, read by readData,
     """
-
-    # some preparation for training
 
     patch.requires_grad = True
     patch.to(device)

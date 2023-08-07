@@ -2,7 +2,7 @@ import torch, torchvision
 import logging
 from PatchTrainer import train, readData, test
 from PatchApply import getTransformations
-from torch.utils.data import DataLoader
+from torch.utils.data import DataLoader,Dataset
 
 ROOT = r"C:\Users\96585\Documents\GitHub\CodeCAP\Data\cifar10"
 
@@ -34,6 +34,7 @@ if __name__ == '__main__':
 
     patchOnly, patchAndTrigger = getTransformations(32, 8, 6)
     m = torch.jit.load(r'C:\Users\96585\Documents\GitHub\CodeCAP\PretrainedModels\cifar10_resnet56.tjm')
+
 
     trans = torchvision.transforms.Normalize([0.4914, 0.4822, 0.4465], [0.247, 0.243, 0.261])
     patch = torch.zeros(3, 32, 32, device=device)
