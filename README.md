@@ -5,21 +5,18 @@ The PatchBackdoor codebase is associated with the paper titled '**PatchBackdoor:
 * torch==1.11.0
 * torchvision==0.12.0
 
-we did not test on other versions of torch/torchvision.
-However, since we are not using some picky functions from torch.
-Close versions should work too, which means, in most case, as far as you can run 
+We have not tested our code with other versions of torch/torchvision. However, since we do not utilize some sensitive functions from torch, it is likely that close versions will work as well. In most cases, as long as you can run
 ```python
 import torch
 a=torch.rand((3,224,224),device='cuda')
 ```
-Then most likely, your environment could run our code.
-
+, it is highly likely that your environment will be able to run our code successfully
 ### Example Usage
 * simply running 
 ```bash
 python TrainPatchCifar10.py
 ```
-should work. it will keep printing the data of training. An example of data is shown below:
+should work. It will keep printing the data of training. An example of data is shown below:
 ```
 train loss: 
 38614.067; 55173.612; sumLoss: 93787.679
@@ -30,14 +27,17 @@ vali Top1:
 raio:
 1.00;  1.21;    
 ```
-First column is clean accuracy and its ratio, second column is attack success rate and its ratio.
-For more about ratio please refer to comment in PatchTrainer.
+The first column includes the clean accuracy and its corresponding ratio, while the second column represents the attack success rate and its ratio. For more information on ratios, please refer to the comment in PatchTrainer.
 
-Then it will generate a file called 'result.report', 
-by torch.load that file, you can see the patch, the trained model, and testing data and so on.
-
+Running the code will generate a file named 'result.report'. By loading this file using torch.load, you will be able to view details such as the patch, trained model, testing data, and more
 ### Data preparation (Optional)
-Download Imagenette from https://github.com/fastai/imagenette. Or precisely https://s3.amazonaws.com/fast-ai-imageclas/imagenette2-320.tgz
+1. Download Imagenette from https://github.com/fastai/imagenette. Or precisely https://s3.amazonaws.com/fast-ai-imageclas/imagenette2-320.tgz
+2. If you are Windows user, simply unzip it with Bandizip or any other unzip tools
+3. If you are Linux or mac user, 
+```bash
+tar -zxvf imagenette2-320.tgz
+```
+should work. Please remember the directory of dataset.
 ### Content 
 * Transformations 
 * Training and Testing
@@ -46,8 +46,11 @@ Download Imagenette from https://github.com/fastai/imagenette. Or precisely http
 * The code is stored in PatchApply.py
 * Then we are going to explain every single function in PatchApply.py
 ##### PatchOnlyProtocol
-* This function basically resize *pic* with given *resize* and put it into right bottom, and cover it on the patch.
-In another word, the right bottom part of the patch is useless.
+* This function basically resize *pic* with specified *resize* parameter and places it in the bottom right corner, 
+covering the corresponding area on the *patch*.
+* In other words, the bottom right part of the patch is useless.
+* For example, if *pic* is !(pic.png ''aa'')
+
 
 
 # This is not finished yet, will be mostly finished before 2023/8/8!
