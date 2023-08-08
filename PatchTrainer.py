@@ -241,7 +241,7 @@ def train(name: str,
     def save():
         endTime = str(datetime.datetime.now())
         report = {'patch': patch, 'model': [m.state_dict() for m in models],
-                  'lr': lr, 'rounds': rounds, 'transCount': transL,
+                  'lr': lr, 'rounds': rounds-1, 'transCount': transL,
                   'train count': trainCount, 'vali count': valiCount,
                   'train loss': trainLossData,
                   'train acc': trainAcc, 'vali acc': valiAcc,

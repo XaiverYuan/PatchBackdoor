@@ -39,7 +39,7 @@ if __name__ == '__main__':
     trans = torchvision.transforms.Normalize([0.4914, 0.4822, 0.4465], [0.247, 0.243, 0.261])
     patch = torch.zeros(3, 32, 32, device=device)
 
-    report = train('result', trainSet, testSet, [m,m], patch,
+    report = train('result', trainSet, testSet, m, patch,
                    transformation=[patchOnly, patchAndTrigger],
                    norm=trans,
                    target=[-2, 9], inProgressShow=True, trainAccCheck=True, valiAccCheck=True,

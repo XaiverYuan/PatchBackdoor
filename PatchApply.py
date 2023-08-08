@@ -2,7 +2,7 @@ import torch, torchvision
 from typing import Callable, Union, Tuple
 
 
-@DeprecationWarning
+
 def patchOnlyProtocol(pic: torch.Tensor, patch: torch.Tensor, resize: torchvision.transforms.Resize,
                       side: int) -> torch.Tensor:
     """
@@ -20,7 +20,7 @@ def patchOnlyProtocol(pic: torch.Tensor, patch: torch.Tensor, resize: torchvisio
     newX[:, :, side:, side:] = resize(pic)
     return newX
 
-@DeprecationWarning
+
 def patchAndTriggerProtocol(pic: torch.Tensor, patch: torch.Tensor,
                             patchOnly: Callable[[torch.Tensor, torch.Tensor], torch.Tensor], trigger: torch.Tensor,
                             x: int, y: int):
