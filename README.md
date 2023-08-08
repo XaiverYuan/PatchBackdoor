@@ -58,10 +58,12 @@ covering the corresponding area on the *patch*.
 <p >
   <img src="./markdown/patch.png" width=1024 title="Just a patch, nothing more">
 </p>
-* And the *side*=8, then the result will be
+
+* And the *side* =8, then the result will be
 <p >
   <img src="./markdown/patchOnly.png" width=1024 title="patched image">
 </p>
+
 * In that case, the corresponding *resize* would be
 
 ```python
@@ -198,10 +200,10 @@ If you still have some question, please see TrainPatchCifar10 as a good example 
 
 If you still do not understand after that, please let me know by leaving an Issue or send me Email yuanyz21@mails.tsinghua.edu.cn
 
-*This is my first paper. If you think something could be improve, please let me know!*
+*This is my first paper. If you think something could be improved, please let me know!*
 ### Personal
 This paper took two years to finish. I know I am kind of Procrastination.
-I am pretty exciting when I know this paper is accepted. I want to share a quotes with everyone here.
+I am pretty exciting when I know this paper is accepted. I want to share a quote with everyone here.
 > It is the time you have wasted for your rose that makes your rose so important
 
 <p >
