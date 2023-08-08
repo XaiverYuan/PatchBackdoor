@@ -1,8 +1,7 @@
 import torch, torchvision
 import logging
-from PatchTrainer import train, test
+from PatchTrainer import train
 from PatchApply import getTransformations
-from torch.utils.data import DataLoader,Dataset
 
 ROOT = r"C:\Users\96585\Documents\GitHub\CodeCAP\Data\cifar10"
 
@@ -33,7 +32,9 @@ if __name__ == '__main__':
         device = 'cpu'
 
     patchOnly, patchAndTrigger = getTransformations(32, 8, 6)
-    m = torch.jit.load(r'C:\Users\96585\Documents\GitHub\CodeCAP\PretrainedModels\cifar10_resnet56.tjm')
+    m = torchvision.models.mobilenet_v2(num_classes=10)
+    anonM=torch.jit.load(r'CIFARMODELmobile')
+    m.load_state_dict(anonM.state_dict())
 
 
     trans = torchvision.transforms.Normalize([0.4914, 0.4822, 0.4465], [0.247, 0.243, 0.261])

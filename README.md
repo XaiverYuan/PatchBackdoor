@@ -15,6 +15,8 @@ a=torch.rand((3,224,224),device='cuda')
 * simply running 
 ```bash
 python TrainPatchCifar10.py
+or 
+python TrainPatchImagenette.py
 ```
 should work. It will keep printing the data of training. An example of data is shown below:
 ```
