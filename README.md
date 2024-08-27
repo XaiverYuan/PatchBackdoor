@@ -1,5 +1,5 @@
 # PatchBackdoor
-The PatchBackdoor codebase is associated with the paper titled '**PatchBackdoor: Backdoor Attack against Deep Neural Networks without Model Modification**'.
+The PatchBackdoor codebase is associated with the [paper '**PatchBackdoor: Backdoor Attack against Deep Neural Networks without Model Modification**'.](https://dl.acm.org/doi/pdf/10.1145/3581783.3612032)
 ### Prerequisite
 * tqdm==4.63.0 
 * torch==1.11.0
